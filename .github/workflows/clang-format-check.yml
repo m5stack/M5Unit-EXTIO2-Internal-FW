@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         path:
-          - check: './'    # path to include
+          - check: './Src'    # path to include
             exclude: ''    # path to exclude
           # - check: 'src'
           #   exclude: ''
