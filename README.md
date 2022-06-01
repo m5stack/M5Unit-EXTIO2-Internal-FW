@@ -8,6 +8,7 @@
 
 >MODE CONFING
 
+
 | REG  | DESC      | LEN    | R/W |
 | ---- | --------- | ------ | --- |
 | 0x00 | MODE_CH_1 | 1 BYTE | R/W |
@@ -21,7 +22,7 @@
 
 - Value:
 
-```
+```cpp
 DIGITAL_INPUT_MODE=0 
 DIGITAL_OUTPUT_MODE=1 
 ADC_INPUT_MODE=2
@@ -33,14 +34,14 @@ RGB_LED_MODE=4
 
 | REG  | DESC                   | LEN    | R/W |
 | ---- | ---------------------- | ------ | --- |
-| 0x10 | OUTPUT_CTL_REG_CH_1    | 1 BYTE | R/W |
-| 0x11 | OUTPUT_CTL_REG_CH_2    | 1 BYTE | R/W |
-| 0x12 | OUTPUT_CTL_REG_CH_3    | 1 BYTE | R/W |
-| 0x13 | OUTPUT_CTL_REG_CH_4    | 1 BYTE | R/W |
-| 0x14 | OUTPUT_CTL_REG_CH_5    | 1 BYTE | R/W |
-| 0x15 | OUTPUT_CTL_REG_CH_6    | 1 BYTE | R/W |
-| 0x16 | OUTPUT_CTL_REG_CH_7    | 1 BYTE | R/W |
-| 0x17 | OUTPUT_CTL_REG_CH_8    | 1 BYTE | R/W |
+| 0x10 | OUTPUT_CTL_REG_CH_1    | 1 BYTE | W   |
+| 0x11 | OUTPUT_CTL_REG_CH_2    | 1 BYTE | W   |
+| 0x12 | OUTPUT_CTL_REG_CH_3    | 1 BYTE | W   |
+| 0x13 | OUTPUT_CTL_REG_CH_4    | 1 BYTE | W   |
+| 0x14 | OUTPUT_CTL_REG_CH_5    | 1 BYTE | W   |
+| 0x15 | OUTPUT_CTL_REG_CH_6    | 1 BYTE | W   |
+| 0x16 | OUTPUT_CTL_REG_CH_7    | 1 BYTE | W   |
+| 0x17 | OUTPUT_CTL_REG_CH_8    | 1 BYTE | W   |
 | 0x20 | DIGITAL_INPUT_REG_CH_1 | 1 BYTE | R   |
 | 0x21 | DIGITAL_INPUT_REG_CH_2 | 1 BYTE | R   |
 | 0x22 | DIGITAL_INPUT_REG_CH_3 | 1 BYTE | R   |
@@ -52,7 +53,7 @@ RGB_LED_MODE=4
 
 - Value:
 
-```
+```cpp
 HIGH:1 / LOW:0
 ```
 
@@ -97,16 +98,16 @@ HIGH:1 / LOW:0
 
 >SERVO PULSE CTL
 
-| REG  | DESC                                         | LEN    | R/W |
-| ---- | -------------------------------------------- | ------ | --- |
-| 0x60 | SERVO_PULSE_16B_REG_CH_1<br> Value: 0-2500us | 2 BYTE | R/W |
-| 0x62 | SERVO_PULSE_16B_REG_CH_2<br> Value: 0-2500us | 2 BYTE | R/W |
-| 0x64 | SERVO_PULSE_16B_REG_CH_3<br> Value: 0-2500us | 2 BYTE | R/W |
-| 0x66 | SERVO_PULSE_16B_REG_CH_4<br> Value: 0-2500us | 2 BYTE | R/W |
-| 0x68 | SERVO_PULSE_16B_REG_CH_5<br> Value: 0-2500us | 2 BYTE | R/W |
-| 0x6A | SERVO_PULSE_16B_REG_CH_6<br> Value: 0-2500us | 2 BYTE | R/W |
-| 0x6C | SERVO_PULSE_16B_REG_CH_7<br> Value: 0-2500us | 2 BYTE | R/W |
-| 0x6E | SERVO_PULSE_16B_REG_CH_8<br> Value: 0-2500us | 2 BYTE | R/W |
+| REG  | DESC                                           | LEN    | R/W |
+| ---- | ---------------------------------------------- | ------ | --- |
+| 0x60 | SERVO_PULSE_16B_REG_CH_1<br> Value: 500-2500us | 2 BYTE | R/W |
+| 0x62 | SERVO_PULSE_16B_REG_CH_2<br> Value: 500-2500us | 2 BYTE | R/W |
+| 0x64 | SERVO_PULSE_16B_REG_CH_3<br> Value: 500-2500us | 2 BYTE | R/W |
+| 0x66 | SERVO_PULSE_16B_REG_CH_4<br> Value: 500-2500us | 2 BYTE | R/W |
+| 0x68 | SERVO_PULSE_16B_REG_CH_5<br> Value: 500-2500us | 2 BYTE | R/W |
+| 0x6A | SERVO_PULSE_16B_REG_CH_6<br> Value: 500-2500us | 2 BYTE | R/W |
+| 0x6C | SERVO_PULSE_16B_REG_CH_7<br> Value: 500-2500us | 2 BYTE | R/W |
+| 0x6E | SERVO_PULSE_16B_REG_CH_8<br> Value: 500-2500us | 2 BYTE | R/W |
 
 >RGB LED CTL
 
@@ -120,6 +121,8 @@ HIGH:1 / LOW:0
 | 0x7F | RGB_24B_REG_CH_6：RGB 888 | 3 BYTE | R/W |
 | 0x82 | RGB_24B_REG_CH_7：RGB 888 | 3 BYTE | R/W |
 | 0x85 | RGB_24B_REG_CH_8：RGB 888 | 3 BYTE | R/W |
+
+?>Note: Do not write to the I2C address configuration register repeatedly at high frequency.
 
 >CONFIG
 
