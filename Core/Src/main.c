@@ -62,7 +62,7 @@
 #define IO6_GPIO GPIOA, GPIO_PIN_6
 #define IO7_GPIO GPIOA, GPIO_PIN_7
 
-#define FIRMWARE_VERSION 1
+#define FIRMWARE_VERSION 2
 #define I2C_ADDRESS      0x45
 
 /* USER CODE END PD */
@@ -278,26 +278,57 @@ void i2c1_receive_callback(uint8_t *rx_data, uint16_t len) {
         i2c1_set_send_data((uint8_t *)&io_mode_save[rx_data[0]], 1);
     } else if (len > 1 && (rx_data[0] >= 0x10 & rx_data[0] <= 0x17)) {
         for (int i = 0; i < len - 1; i++) {
-            switch (rx_data[1 + i]) {
-                case 1:
-                    HAL_GPIO_WritePin(GPIOA,
-                                      (uint16_t)(1 << (rx_data[0] + i - 0x10)),
-                                      GPIO_PIN_SET);
-                    break;
-                case 0:
-                    HAL_GPIO_WritePin(GPIOA,
-                                      (uint16_t)(1 << (rx_data[0] + i - 0x10)),
-                                      GPIO_PIN_RESET);
-                    break;
+            if(io_mode_save[i] == OUTPUT_MODE) {
+                switch (rx_data[1 + i]) {
+                    case 1:
+                        HAL_GPIO_WritePin(GPIOA,
+                                          (uint16_t)(1 << (rx_data[0] + i - 0x10)),
+                                          GPIO_PIN_SET);
+                        break;
+                    case 0:
+                        HAL_GPIO_WritePin(GPIOA,
+                                          (uint16_t)(1 << (rx_data[0] + i - 0x10)),
+                                          GPIO_PIN_RESET);
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         }
+    } else if (len > 1 && (rx_data[0] == 0x18)) {
+		for (int i = 0; i < 8; i++) {
+			if(io_mode_save[i] == OUTPUT_MODE) {
+				if ((rx_data[1]>>i)&0x01) {
+					HAL_GPIO_WritePin(GPIOA,
+									  (uint16_t)(1 << (i)),
+									  GPIO_PIN_SET);
+				}
+				else {
+					HAL_GPIO_WritePin(GPIOA,
+									  (uint16_t)(1 << (i)),
+									  GPIO_PIN_RESET);
+				}
+			}
+		}
     } else if (len == 1 && (rx_data[0] >= 0x20 & rx_data[0] <= 0x27)) {
-        input_state =
-            HAL_GPIO_ReadPin(GPIOA, (uint16_t)(1 << (rx_data[0] - 0x20)));
+        if(io_mode_save[rx_data[0] - 0x20] == INPUT_MODE) {
+            input_state =
+                HAL_GPIO_ReadPin(GPIOA, (uint16_t)(1 << (rx_data[0] - 0x20)));
+        }
+        else {
+            input_state = 0;
+        }
         i2c1_set_send_data((uint8_t *)&input_state, 1);
+    } else if (len > 1 && (rx_data[0] == 0x28)) {
+		input_state = 0;
+		for (int i = 0; i < 8; i++) {
+			if(io_mode_save[i] == INPUT_MODE) {
+				input_state |=
+					HAL_GPIO_ReadPin(GPIOA, (uint16_t)(1 << (i)));
+			}
+		}
+		i2c1_set_send_data((uint8_t *)&input_state, 1);
     } else if (len == 1 && (rx_data[0] >= 0x30 & rx_data[0] <= 0x37)) {
         readADCState((rx_data[0] - 0x30), 8);
     } else if (len == 1 && (rx_data[0] >= 0x40 & rx_data[0] <= 0x4F)) {
