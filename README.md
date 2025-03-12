@@ -28,6 +28,7 @@ DIGITAL_OUTPUT_MODE=1
 ADC_INPUT_MODE=2
 SERVO_CTL_MODE=3 
 RGB_LED_MODE=4
+PWM_MODE=5
 ```
 
 >DIGITAL INPUT/OUTPUT
@@ -122,6 +123,25 @@ HIGH:1 / LOW:0
 | 0x82 | RGB_24B_REG_CH_7：RGB 888 | 3 BYTE | R/W |
 | 0x85 | RGB_24B_REG_CH_8：RGB 888 | 3 BYTE | R/W |
 
+>PWM DUTYCYCLE CTL
+
+| REG  | DESC                                   | LEN    | R/W |
+| ---- | -------------------------------------- | ------ | --- |
+| 0x90 | PWM_DUTYCUCLE_REG_CH_1<br>Value: 0-100 | 2 BYTE | R/W |
+| 0x91 | PWM_DUTYCUCLE_REG_CH_2<br>Value: 0-100 | 2 BYTE | R/W |
+| 0x92 | PWM_DUTYCUCLE_REG_CH_3<br>Value: 0-100 | 2 BYTE | R/W |
+| 0x93 | PWM_DUTYCUCLE_REG_CH_4<br>Value: 0-100 | 2 BYTE | R/W |
+| 0x94 | PWM_DUTYCUCLE_REG_CH_5<br>Value: 0-100 | 2 BYTE | R/W |
+| 0x95 | PWM_DUTYCUCLE_REG_CH_6<br>Value: 0-100 | 2 BYTE | R/W |
+| 0x96 | PWM_DUTYCUCLE_REG_CH_7<br>Value: 0-100 | 2 BYTE | R/W |
+| 0x97 | PWM_DUTYCUCLE_REG_CH_8<br>Value: 0-100 | 2 BYTE | R/W |
+
+>PWM FREQUENCY CTL
+
+| REG  | DESC                            | LEN    | R/W |
+| ---- | ------------------------------- | ------ | --- |
+| 0xA0 | PWM_FREQUENCY_REG<br>Value: 0-4 | 1 BYTE | R/W |
+
 ?>Note: Do not write to the I2C address configuration register repeatedly at high frequency.
 
 >CONFIG
@@ -130,3 +150,10 @@ HIGH:1 / LOW:0
 | ---- | ------------------------------------------------------------------- | ------ | --- |
 | 0xFE | FW VERSION                                                          | 1 BYTE | R   |
 | 0xFF | I2C ADDR CONFIG (warn: Repeated writing may cause partition damage) | 1 BYTE | R/W |
+
+### Firmware Version History
+
+- **V3**:
+  - Migrated development environment to STM32CubeIDE.
+  - Added **PWM Mode** support with extended configuration registers (PWM duty cycle & frequency control).
+  - Added **I2C IAP (In-Application Programming)** functionality for firmware upgrades via I2C interface.
