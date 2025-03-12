@@ -1,0 +1,13 @@
+../Drivers/CMSIS/Include/core_cm0.h:856:34:__NVIC_SystemReset	0	static,ignoring_inline_asm
+../Core/Src/main.c:124:10:time_stick_get	0	static
+../Core/Src/main.c:129:10:My_CRC	8	static
+../Core/Src/main.c:140:9:compute_fw_crc32	8	static
+../Core/Src/main.c:160:6:I2C1_IRQHandler	20	static
+../Core/Src/main.c:241:6:Reset_AllPeriph	8	static
+../Core/Src/main.c:260:6:Jump_APP	8	static,ignoring_inline_asm
+../Core/Src/main.c:280:6:Write_Code	32	static
+../Core/Src/main.c:338:6:iap_i2c	24	static,ignoring_inline_asm
+../Core/Src/main.c:439:6:SystemClock_Config	8	static
+../Core/Src/main.c:383:5:main	16	static
+../Core/Src/main.c:475:6:Error_Handler	8	static,ignoring_inline_asm
+../Core/Src/main.c:495:6:assert_failed	0	static

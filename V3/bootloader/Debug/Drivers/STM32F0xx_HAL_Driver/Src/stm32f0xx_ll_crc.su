@@ -1,0 +1,6 @@
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_crc.h:160:22:LL_CRC_ResetCRCCalculationUnit	16	static
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_crc.h:209:22:LL_CRC_SetInputDataReverseMode	16	static
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_crc.h:238:22:LL_CRC_SetOutputDataReverseMode	16	static
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_crc.h:266:22:LL_CRC_SetInitialData	16	static
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_crc.h:433:22:LL_CRC_Write_IDR	16	static
+../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_crc.c:62:13:LL_CRC_DeInit	24	static

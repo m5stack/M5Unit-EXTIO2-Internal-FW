@@ -1,0 +1,5 @@
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_crc.h:209:22:LL_CRC_SetInputDataReverseMode	16	static
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_crc.h:238:22:LL_CRC_SetOutputDataReverseMode	16	static
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_crc.h:266:22:LL_CRC_SetInitialData	16	static
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h:225:22:LL_AHB1_GRP1_EnableClock	24	static
+../Core/Src/crc.c:28:6:MX_CRC_Init	8	static
